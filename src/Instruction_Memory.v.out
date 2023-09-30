@@ -1,0 +1,39 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_000001f0a59b2720 .scope module, "Instruction_Memory" "Instruction_Memory" 2 15;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "rst";
+    .port_info 1 /INPUT 32 "A";
+    .port_info 2 /OUTPUT 32 "RD";
+o000001f0a59e70b8 .functor BUFZ 1, C4<z>; HiZ drive
+L_000001f0a59b31d0 .functor NOT 1, o000001f0a59e70b8, C4<0>, C4<0>, C4<0>;
+o000001f0a59e6f98 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v000001f0a59b28b0_0 .net "A", 31 0, o000001f0a59e6f98;  0 drivers
+v000001f0a59b2950_0 .net "RD", 31 0, L_000001f0a5b1da20;  1 drivers
+v000001f0a59b29f0_0 .net *"_ivl_0", 0 0, L_000001f0a59b31d0;  1 drivers
+L_000001f0a5a30028 .functor BUFT 1, C4<00000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v000001f0a59b2a90_0 .net/2u *"_ivl_2", 31 0, L_000001f0a5a30028;  1 drivers
+v000001f0a5b1d660_0 .net *"_ivl_4", 31 0, L_000001f0a5b1d8e0;  1 drivers
+v000001f0a5b1d700_0 .net *"_ivl_7", 29 0, L_000001f0a5b1d980;  1 drivers
+v000001f0a5b1d7a0 .array "mem", 0 1023, 31 0;
+v000001f0a5b1d840_0 .net "rst", 0 0, o000001f0a59e70b8;  0 drivers
+L_000001f0a5b1d8e0 .array/port v000001f0a5b1d7a0, L_000001f0a5b1d980;
+L_000001f0a5b1d980 .part o000001f0a59e6f98, 2, 30;
+L_000001f0a5b1da20 .functor MUXZ 32, L_000001f0a5b1d8e0, L_000001f0a5a30028, L_000001f0a59b31d0, C4<>;
+    .scope S_000001f0a59b2720;
+T_0 ;
+    %vpi_call 2 26 "$readmemb", "bininst.bin", v000001f0a5b1d7a0, 32'sb00000000000000000000000000000000, 32'sb00000000000000000000001111111111 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "Instruction_Memory.v";
