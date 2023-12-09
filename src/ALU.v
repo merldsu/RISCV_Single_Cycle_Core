@@ -22,14 +22,14 @@ module ALU(A,B,Result,ALUControl,OverFlow,Carry,Zero,Negative);
     wire Cout;
     wire [31:0]Sum;
 
-    assign Sum = (ALUControl[0] == 1'b0) ? A + B :
+    assign {Cout,Sum} = (ALUControl[0] == 1'b0) ? A + B :
                                           (A + ((~B)+1)) ;
-    assign {Cout,Result} = (ALUControl == 3'b000) ? Sum :
+    assign Result = (ALUControl == 3'b000) ? Sum :
                            (ALUControl == 3'b001) ? Sum :
                            (ALUControl == 3'b010) ? A & B :
                            (ALUControl == 3'b011) ? A | B :
-                           (ALUControl == 3'b101) ? {{32{1'b0}},(Sum[31])} :
-                           {33{1'b0}};
+                           (ALUControl == 3'b101) ? {{32{1'b0}},(Sum[31])} : {32{1'b0}};
+    
     assign OverFlow = ((Sum[31] ^ A[31]) & 
                       (~(ALUControl[0] ^ B[31] ^ A[31])) &
                       (~ALUControl[1]));
